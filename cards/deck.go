@@ -5,13 +5,6 @@ import "fmt"
 //Declarando o novo tipo: deck, que funciona como um slice de string.
 type deck []string
 
-//Lembrar que (d deck) é um receiver, que torna a função disponíveis para
-//variáveis do tipo deck.
-func (d deck) print() {
-	for i, singleCard := range d {
-		fmt.Println(i, singleCard)
-	}
-}
 
 //Não tem receiver porque está justamente criando uma variável do tipo deck, ou seja
 //não faria sentido que para criar um novo deck precisássemos de um já pronto.
@@ -35,4 +28,18 @@ func newDeck(joker bool) deck {
 	}
 
 	return cards
+}
+
+
+//Lembrar que (d deck) é um receiver, que torna a função disponíveis para
+//variáveis do tipo deck.
+func (d deck) print() {
+	for i, singleCard := range d {
+		fmt.Println(i, singleCard)
+	}
+}
+
+//Função que retorna dois recursos diferentes, ambos do tipo deck.
+func deal (d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
 }
