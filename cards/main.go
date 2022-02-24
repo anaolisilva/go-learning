@@ -12,6 +12,8 @@ func main() {
 
 	//Cria novo deck a partir de arquivo
 	cards := newDeckFromFile("my_cards")
+	
+	cards.shuffle()
 
 	hand, remainingCards := deal(cards, 3)
 
@@ -21,7 +23,4 @@ func main() {
 	
 	fmt.Println("Remaining cards:")
 	remainingCards.print()
-
-	fmt.Print(cards.toString())
-
 }

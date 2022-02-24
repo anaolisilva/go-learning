@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 //Declarando o novo tipo: deck, que funciona como um slice de string.
@@ -84,4 +86,22 @@ func newDeckFromFile(filename string) deck {
 	deckFromFile := deck(s)
 
 	return deckFromFile
+}
+
+//Função que vai embaralhar as cartas "manualmente"
+func (d deck) shuffle() {
+	
+	for i := range d {
+		//Gera source nova para que a geração de algarítmos aleatória seja melhor.
+		//Cada vez que a função for chamada, vai pegar o horário de agora e convertê-lo num valor int64.
+		source := rand.NewSource(time.Now().UnixNano())
+		r := rand.New(source)
+
+		//len retorna length
+		newPosition := r.Intn(len(d) - 1)
+
+		//Troca em uma linha. d[i] recebe o que está em d[newPosition] e vice versa
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
+
 }
